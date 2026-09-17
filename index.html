@@ -169,7 +169,7 @@ html:not(.js) .preloader{display:none}
 .hero-bg-two{background-image:url("public/zdorzub-exterior-evening.png");background-position:center}
 .hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(4,7,12,.92) 0%,rgba(4,7,12,.72) 32%,rgba(4,7,12,.12) 66%,rgba(4,7,12,.28) 100%);pointer-events:none}
 .hero-bg.active{opacity:1}
-.hero.cinematic .hero-bg{animation:heroZoom 13s ease-in-out infinite alternate}
+.hero.cinematic .hero-bg{animation:heroZoom 13s linear infinite alternate}
 @keyframes heroZoom{from{transform:scale(1.12)}to{transform:scale(1)}}
 .hero .wrap{position:relative;z-index:2;width:100%}
 .hero-inner{max-width:540px}
