@@ -29,7 +29,7 @@
   --r:18px;
   --r-sm:12px;
   --pad:clamp(20px,6vw,96px);
-  --sp:clamp(74px,9vw,130px);
+  --sp:clamp(58px,6.5vw,92px);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -164,12 +164,13 @@ html:not(.js) .preloader{display:none}
   padding:calc(78px + clamp(30px,5vw,54px)) 0 clamp(64px,9vw,96px);
   background:#04070c;
 }
-.hero-bg{position:absolute;inset:-5%;z-index:0;background-position:center;background-size:cover;transform:scale(1.16);will-change:transform,opacity}
+.hero-bg{position:absolute;inset:-3%;z-index:0;background-position:center;background-size:cover;transform:scale(1.12);opacity:0;transition:opacity 2s ease;will-change:transform,opacity}
 .hero-bg-one{background-image:url("public/zdorzub-exterior.png")}
-.hero-bg-two{background-image:url("public/hero-vladivostok-evening.png");opacity:0;transform:scale(1.13);transition:opacity 2.2s ease}
+.hero-bg-two{background-image:url("public/zdorzub-exterior-evening.png");background-position:center}
 .hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(4,7,12,.92) 0%,rgba(4,7,12,.72) 32%,rgba(4,7,12,.12) 66%,rgba(4,7,12,.28) 100%);pointer-events:none}
-.hero.cinematic .hero-bg-one{transform:scale(1);transition:transform 12s cubic-bezier(.16,.7,.25,1)}
-.hero.scene-two .hero-bg-two{opacity:1;transform:scale(1);transition:opacity 2.2s ease,transform 13s cubic-bezier(.16,.7,.25,1)}
+.hero-bg.active{opacity:1}
+.hero.cinematic .hero-bg{animation:heroZoom 13s ease-in-out infinite alternate}
+@keyframes heroZoom{from{transform:scale(1.12)}to{transform:scale(1)}}
 .hero .wrap{position:relative;z-index:2;width:100%}
 .hero-inner{max-width:540px}
 .js .hero-inner>*{opacity:0;transform:translateY(18px)}
@@ -192,7 +193,7 @@ html:not(.js) .preloader{display:none}
 .hero .btn-ghost:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.14)}
 
 .hero-scroll{
-  position:absolute;left:50%;bottom:clamp(38px,6vw,64px);transform:translateX(-50%);z-index:3;
+  position:absolute;left:75%;bottom:clamp(86px,7vw,108px);transform:translateX(-50%);z-index:4;
   width:78px;height:78px;border-radius:50%;border:0;cursor:pointer;
   background:#fff;box-shadow:var(--shadow);display:grid;place-items:center;
 }
@@ -219,29 +220,63 @@ html:not(.js) .preloader{display:none}
 .counter b{display:flex;align-items:flex-start;gap:5px;font:800 clamp(38px,4.4vw,58px)/.9 "Manrope",sans-serif;color:#67d5e4;letter-spacing:-.055em}
 .counter span{display:block;margin-top:12px;font:600 12px/1.35 "Manrope",sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#cbd9ee}
 
-.metrics{padding:0 0 clamp(68px,8vw,104px)}
+.metrics{padding:0 0 clamp(46px,5.5vw,72px)}
 .metrics .wrap{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
-  display:grid;grid-template-columns:repeat(4,1fr);
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
   padding:0;margin-top:clamp(28px,4vw,52px);position:relative;z-index:3;
 }
-.metric{padding:30px 28px;border-right:1px solid var(--line)}
-.metric:last-child{border-right:0}
-.principle-icon{width:48px;height:48px;border-radius:15px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(47,107,255,.08)}
-.principle-icon svg{width:25px;height:25px;stroke:currentColor}
-.metric span{display:block;margin-top:8px;font-size:13px;color:var(--muted)}
+.metric{position:relative;min-height:230px;overflow:hidden;border-radius:22px;background:#dfe8f3;box-shadow:0 14px 34px rgba(25,55,104,.12);isolation:isolate}
+.metric::after{content:"";position:absolute;inset:36% 0 0;background:linear-gradient(180deg,transparent,rgba(5,18,38,.76));z-index:1}
+.metric img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+.metric:hover img{transform:scale(1.035)}
+.metric span{position:absolute;left:14px;right:14px;bottom:20px;z-index:2;color:#fff;text-align:center;font:600 17px/1.25 "Manrope",sans-serif;text-shadow:0 2px 14px rgba(0,0,0,.35)}
 
 /* ---------- before / after ---------- */
-.cases{background:#f3f7ff;padding-block:clamp(64px,8vw,106px)}
+.cases{background:#f3f7ff;padding-block:clamp(54px,6vw,82px)}
 .cases-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:32px}
 .cases-head p{max-width:48ch;color:var(--muted)}
-.case-line{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative}
+.case-carousel{position:relative}
+.case-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 2px 18px}
+.case-track::-webkit-scrollbar{display:none}
+.case-slide{flex:0 0 100%;display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;scroll-snap-align:start}
 .case-photo{position:relative;overflow:hidden;border-radius:22px;background:#fff;box-shadow:var(--shadow);aspect-ratio:1.72/1}
 .case-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .case-label{position:absolute;left:18px;top:18px;padding:9px 14px;border-radius:99px;background:rgba(5,14,28,.78);backdrop-filter:blur(8px);color:#fff;font:700 12px/1 "Manrope",sans-serif;letter-spacing:.08em;text-transform:uppercase}
 .case-photo.after .case-label{background:var(--accent)}
 .case-arrow{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--accent);box-shadow:0 14px 34px rgba(16,45,92,.22);font-size:25px}
 .cases-note{margin-top:18px;color:var(--muted);font-size:13px}
+.case-controls{display:flex;gap:10px;margin-top:4px}
+.case-controls button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:22px;cursor:pointer}
+.case-controls [data-case-next]{border-color:#9bbcff;color:#fff;background:var(--accent);box-shadow:0 0 0 0 rgba(47,107,255,.34);animation:caseNextPulse 1.65s ease-in-out infinite}
+@keyframes caseNextPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(47,107,255,.34)}50%{opacity:.62;box-shadow:0 0 0 9px rgba(47,107,255,0)}}
+
+/* ---------- team / story ---------- */
+.team{background:#fff}
+.journey-wrap + .team{padding-top:42px}
+.team-story{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,78px);align-items:end;margin-bottom:44px}
+.team-story p{font-size:17px;line-height:1.75;color:var(--body)}
+.lab-chip{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:12px 16px;border-radius:99px;background:var(--accent-soft);color:var(--accent-ink);font-weight:700}
+.clinic-journey{position:relative;overflow:hidden;margin:8px 0 46px;padding:32px clamp(24px,4vw,50px);border-radius:26px;background:linear-gradient(118deg,#09162a 0%,#14386d 58%,#2869d8 100%);color:#fff;box-shadow:0 24px 56px rgba(13,48,104,.22)}
+.clinic-journey::before{content:"";position:absolute;width:360px;height:360px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-130px;top:-205px;box-shadow:0 0 0 44px rgba(255,255,255,.035),0 0 0 88px rgba(255,255,255,.025)}
+.journey-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:30px;position:relative;z-index:1}
+.journey-years{font:800 clamp(42px,6vw,78px)/.85 "Manrope",sans-serif;letter-spacing:-.055em;white-space:nowrap}.journey-years i{font-style:normal;color:#69d9e8}.journey-years small{font-size:.44em;color:#a9c4ee;letter-spacing:-.02em}
+.journey-top p{max-width:34ch;color:#d7e4f8;font-size:15px}
+.journey-line{display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:1;gap:18px}
+.journey-line::before{content:"";position:absolute;left:7%;right:7%;top:12px;height:2px;background:rgba(255,255,255,.25)}
+.journey-line::after{content:"";position:absolute;left:7%;top:12px;width:86%;height:2px;background:linear-gradient(90deg,#62dae9,#88b4ff);transform-origin:left;animation:journeyGrow 3.2s cubic-bezier(.16,1,.3,1) infinite alternate}
+.journey-step{position:relative;padding-top:36px}.journey-step::before{content:"";position:absolute;z-index:2;top:4px;left:0;width:18px;height:18px;border-radius:50%;background:#fff;border:5px solid #5a9cff;box-shadow:0 0 0 6px rgba(90,156,255,.16)}
+.journey-step b{display:block;font:800 17px/1.3 "Manrope",sans-serif}.journey-step span{display:block;margin-top:5px;color:#b9cbea;font-size:13px;line-height:1.45}
+@keyframes journeyGrow{from{transform:scaleX(.05);opacity:.55}to{transform:scaleX(1);opacity:1}}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.team-card{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--bg);box-shadow:var(--shadow)}
+.team-card img{width:100%;aspect-ratio:1/1.08;object-fit:cover;object-position:center top;display:block}
+.team-card div{padding:16px 17px 18px}
+.team-card .team-name{display:block;font:800 17px/1.3 "Manrope",sans-serif;color:var(--ink);margin-bottom:5px}
+.team-card b{display:block;font:700 16px/1.3 "Manrope",sans-serif;color:var(--ink)}
+.team-card span{font-size:13px;color:var(--muted)}
+.team-group{grid-column:1/-1;position:relative;overflow:hidden;border-radius:20px;box-shadow:var(--shadow);background:#0d1b30}
+.team-group img{width:100%;height:auto;aspect-ratio:2059/764;object-fit:contain;display:block}
+.team-group figcaption{position:absolute;left:20px;bottom:20px;padding:11px 16px;border-radius:99px;background:rgba(6,19,38,.78);backdrop-filter:blur(8px);color:#fff;font:700 14px/1 "Manrope",sans-serif}
 
 /* ---------- about ---------- */
 .about{background:var(--bg)}
@@ -272,9 +307,9 @@ html:not(.js) .preloader{display:none}
 .card::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;transition:transform .38s cubic-bezier(.16,1,.3,1)}
 .card:hover{transform:translateY(-6px);border-color:#cfe0ff;box-shadow:0 22px 50px rgba(31,66,135,.17)}
 .card:hover::after{transform:scaleX(1)}
-.card .ico{width:56px;height:56px;padding:13px;border-radius:16px;background:var(--accent-soft);color:var(--accent);margin-bottom:16px;transition:background .3s ease,color .3s ease}
+.card .ico{width:68px;height:68px;padding:15px;border-radius:19px;background:var(--accent-soft);color:var(--accent);margin-bottom:18px;transition:background .3s ease,color .3s ease}
 .card:hover .ico{background:var(--accent);color:#fff}
-.card .ico svg{width:100%;height:100%;stroke-width:2.1}
+.card .ico svg{width:100%;height:100%;stroke-width:1.55}
 .card h3{margin:0 0 8px}
 .card p{font-size:14px;color:var(--body);flex:1}
 .card .arrowlink{margin-top:16px}
@@ -347,6 +382,7 @@ html:not(.js) .preloader{display:none}
 
 /* ---------- gallery ---------- */
 .gallery .wrap{position:relative;z-index:1}
+.gallery{padding-block:clamp(74px,8vw,116px)}
 .gallery h2{color:#fff}
 .gallery-head{margin-bottom:36px}
 .works-row{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(24px,4vw,40px)}
@@ -435,9 +471,11 @@ html:not(.js) .preloader{display:none}
 .review-summary .rs-tags{margin-left:auto;font-size:14px;color:var(--body);max-width:38ch}
 .review-summary .rs-tags b{display:block;color:var(--ink);font:700 12.5px "Manrope",sans-serif;letter-spacing:.03em;text-transform:uppercase;margin-bottom:6px}
 .reviews-more{margin-top:32px}
-.review-grid{columns:2;column-gap:18px}
+.review-carousel{position:relative}
+.review-grid{display:grid;grid-template-rows:repeat(2,minmax(205px,auto));grid-auto-flow:column;grid-auto-columns:calc((100% - 18px)/2.18);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:3px 2px 18px}
+.review-grid::-webkit-scrollbar{display:none}
 .review{
-  break-inside:avoid;margin-bottom:18px;
+  margin:0;scroll-snap-align:start;
   background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:26px;
   transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,border-color .3s ease;
 }
@@ -449,9 +487,13 @@ html:not(.js) .preloader{display:none}
 .review footer b{font-family:"Manrope",sans-serif;color:var(--ink);font-weight:700}
 .review footer a{color:var(--muted)}
 .review footer a:hover{color:var(--accent)}
+.stars-text{display:block;color:var(--star);font-size:18px;letter-spacing:2px;margin-bottom:14px}
+.review-controls{display:flex;gap:10px;margin-top:12px}
+.review-controls button{width:46px;height:46px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--ink);font-size:21px;cursor:pointer;transition:.25s ease}
+.review-controls button:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 
 /* ---------- patient stories ---------- */
-.pstories{background:var(--bg)}
+.pstories{background:var(--bg);padding-bottom:46px}
 .pstories-head{margin-bottom:34px}
 .pstory-viewport{position:relative;transition:height .45s cubic-bezier(.16,1,.3,1)}
 .pstory{
@@ -514,7 +556,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
 .map-card small{color:var(--muted);font-size:12.5px}
 
 /* ---------- faq ---------- */
-.faq{background:var(--bg)}
+.faq{background:var(--bg);padding-top:58px}
 .faq .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,72px);align-items:start}
 .faq-aside{position:sticky;top:104px}
 .faq-list{display:flex;flex-direction:column;gap:12px}
@@ -545,6 +587,10 @@ html:not(.js) .pstory-viewport{height:auto!important}
 .lightbox[hidden]{display:none}
 .lightbox img{max-width:92vw;max-height:84vh;border-radius:10px}
 .lightbox button{position:absolute;top:18px;right:18px;width:44px;height:44px;border:0;border-radius:50%;background:#fff;color:var(--ink);font-size:22px;cursor:pointer}
+.lightbox .lb-arrow{top:50%;transform:translateY(-50%);width:54px;height:54px;font-size:28px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.lightbox .lb-prev{left:22px;right:auto}
+.lightbox .lb-next{right:22px}
+@media(max-width:620px){.lightbox .lb-arrow{width:46px;height:46px}.lightbox .lb-prev{left:8px}.lightbox .lb-next{right:8px}}
 
 @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 
@@ -559,6 +605,9 @@ html:not(.js) .pstory-viewport{height:auto!important}
   .review-summary .rs-tags{margin-left:0}
   .about-photo{order:-1}
   .news-row{flex-direction:column;align-items:flex-start;gap:8px}
+  .team-story{grid-template-columns:1fr}
+  .journey-line{grid-template-columns:repeat(2,1fr);row-gap:28px}.journey-line::before,.journey-line::after{display:none}.journey-step{padding-top:30px}
+  .team-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:1080px){
   .svc{grid-template-columns:repeat(2,1fr)}
@@ -572,6 +621,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
   .svc .card{flex:0 0 76%;max-width:300px;scroll-snap-align:start}
 }
 @media(max-width:620px){
+  .pstories{padding-bottom:34px}.faq{padding-top:42px}
   .hero h1{font-size:39px}
   .smile-swap{min-width:3.2em}
   .counters .wrap,.metrics .wrap{grid-template-columns:1fr 1fr}
@@ -579,21 +629,23 @@ html:not(.js) .pstory-viewport{height:auto!important}
   .counter:nth-child(odd){border-right:1px solid rgba(255,255,255,.14)}
   .counter:nth-last-child(-n+2){border-bottom:0}
   .counter b{font-size:42px}
-  .metric{border-right:0;border-bottom:1px solid var(--line)}
-  .metric:nth-child(odd){border-right:1px solid var(--line)}
-  .metric:nth-last-child(-n+2){border-bottom:0}
-  .review-grid{columns:1}
+  .metric{min-height:210px}
+  .review-grid{grid-auto-columns:82%;grid-template-rows:repeat(2,minmax(190px,auto))}
   .video-list{grid-template-columns:1fr}
   .consult-list{grid-template-columns:1fr;max-width:340px}
   .promo-note span{min-width:0}
   .promo-note .btn-primary{margin-left:0}
-  .hero-scroll{width:62px;height:62px;bottom:clamp(28px,7vw,42px)}
+  .hero-scroll{left:50%;width:62px;height:62px;bottom:clamp(64px,12vw,82px)}
   .gallery-head,.news-head{flex-direction:column;align-items:flex-start}
   .cases-head{display:block}
   .cases-head p{margin-top:14px}
-  .case-line{grid-template-columns:1fr;gap:12px}
+  .case-slide{grid-template-columns:1fr;gap:12px}
   .case-arrow{top:50%;transform:translate(-50%,-50%) rotate(90deg);width:48px;height:48px}
   .case-photo{aspect-ratio:1.48/1}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .journey-top{display:block}.journey-top p{margin-top:14px}.clinic-journey{margin-bottom:34px}
+  .team-card img{aspect-ratio:1/1.12}
+  .team-group{grid-column:1/-1}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;scroll-behavior:auto!important}
@@ -626,9 +678,9 @@ html:not(.js) .pstory-viewport{height:auto!important}
     <nav class="nav">
       <a href="#services">Услуги</a>
       <a href="prices.html">Цены</a>
+      <a href="#about-us">О клинике</a>
       <a href="#reviews">Отзывы</a>
       <a href="#faq">Вопросы</a>
-      <a href="#gallery">Клиника</a>
       <a href="#contacts">Контакты</a>
     </nav>
     <a class="btn btn-primary header-call" href="tel:+7987654321">
@@ -640,7 +692,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-bg hero-bg-one" aria-hidden="true"></div>
+  <div class="hero-bg hero-bg-one active" aria-hidden="true"></div>
   <div class="hero-bg hero-bg-two" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-inner">
@@ -671,7 +723,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
 <!-- ANIMATED COUNTERS -->
 <section class="counters" aria-label="ЗдорЗуб в цифрах">
   <div class="wrap">
-    <div class="counter reveal"><b data-count="2020">0</b><span>год открытия клиники</span></div>
+    <div class="counter reveal"><b data-count="2020" data-plain="true">0</b><span>год открытия клиники</span></div>
     <div class="counter reveal d1"><b data-count="2400" data-suf="+">0</b><span>пациентов выбрали нас</span></div>
     <div class="counter reveal d2"><b data-count="327">0</b><span>отзывов о лечении</span></div>
     <div class="counter reveal d3"><b data-count="96" data-suf="%">0</b><span>пациентов рекомендуют</span></div>
@@ -686,29 +738,89 @@ html:not(.js) .pstory-viewport{height:auto!important}
     </div>
     <div class="svc">
       <article class="card reveal rl">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 0 5 2 5 5 0 2-1 3-1 6s-1 5-2 5-1-3-2-3-1 3-2 3-2-2-2-5-1-4-1-6c0-3 2-5 5-5z"/></svg></div>
+        <div class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.6 4.5c1.8 0 2.8 1.1 4.4 1.1s2.6-1.1 4.4-1.1c3.7 0 5.7 3 5.7 6.2 0 2.8-1.5 5.1-2.3 8.1-.9 3.5-1.6 8.5-3.8 8.5-2 0-1.5-6.5-4-6.5s-2 6.5-4 6.5c-2.2 0-2.9-5-3.8-8.5-.8-3-2.3-5.3-2.3-8.1 0-3.2 2-6.2 5.7-6.2Z"/><path d="M12.1 12.3c1.1-1 2.3-1.5 3.9-1.5 1.6 0 2.8.5 3.9 1.5M13.1 15.2h5.8M16 12.1v6.1"/></svg></div>
         <h3>Лечение</h3>
         <p>Кариес и корневые каналы, восстановление формы зуба, забота о дёснах.</p>
         <a class="arrowlink" href="prices.html">Цены <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
       </article>
       <article class="card reveal rr d1">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 23 13.2-13.2 3 3L9 26H6v-3Z"/><path d="m18.4 10.6 3 3M9.1 19.9l3 3M21.4 7.6l3 3"/><path d="M22.9 5.5h4.6M25.2 3.2v4.6M5.5 8.4h3.6M7.3 6.6v3.6"/><path d="M20.5 15.7c1.1.8 2.1 1.2 3.3 1.2 1.4 0 2.2-.5 3.2-1.2"/></svg></div>
         <h3>Профилактика</h3>
         <p>Профессиональная гигиена и регулярные осмотры.</p>
         <a class="arrowlink" href="prices.html">Цены <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
       </article>
       <article class="card reveal rl d2">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div>
+        <div class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.8 5.2c1.9 0 3.2 1.2 5.2 1.2s3.3-1.2 5.2-1.2c3.5 0 5.3 2.8 5.3 5.8 0 2.6-1.4 4.7-2.1 7.5-.8 3.4-1.5 7.8-3.6 7.8-1.9 0-1.4-6-4.8-6s-2.9 6-4.8 6c-2.1 0-2.8-4.4-3.6-7.8-.7-2.8-2.1-4.9-2.1-7.5 0-3 1.8-5.8 5.3-5.8Z"/><path d="M8 12.2h16M9.1 9.2c2.2.8 4.5 1.2 6.9 1.2s4.7-.4 6.9-1.2"/><path d="M12 15.5h8"/></svg></div>
         <h3>Восстановление</h3>
         <p>Коронки, протезы и виниры.</p>
         <a class="arrowlink" href="prices.html">Цены <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
       </article>
       <article class="card reveal rr d3">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l7 7M9 6 6 9M14 10l6 6a2 2 0 0 1-3 3l-6-6M12 12l-6 6a2 2 0 0 1-3-3l6-6"/></svg></div>
+        <div class="ico"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.5h10l1.8 3.2-1.5 4.3H10.7L9.2 7.7 11 4.5Z"/><path d="M12 12v3h8v-3M13 15v3h6v-3M14 18v8l2 2 2-2v-8"/><path d="M13.7 20.5h4.6M13.7 23h4.6M14 25.5h4"/><path d="M6 10v6M3 13h6"/></svg></div>
         <h3>Хирургия</h3>
         <p>Удаление зубов и имплантация по показаниям.</p>
         <a class="arrowlink" href="prices.html">Цены <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
       </article>
+    </div>
+  </div>
+</section>
+
+<div class="wrap journey-wrap">
+  <div class="clinic-journey reveal" aria-label="Путь клиники с 2020 по 2026 год">
+    <div class="journey-top"><div class="journey-years">2020 <i>→</i> 2026</div><p>Шесть лет развиваем клинику как единое пространство: от диагностики до готовой конструкции из собственной лаборатории.</p></div>
+    <div class="journey-line">
+      <div class="journey-step"><b>2020</b><span>Открыли клинику во Владивостоке</span></div>
+      <div class="journey-step"><b>2022</b><span>Запустили собственную лабораторию</span></div>
+      <div class="journey-step"><b>2024</b><span>Собрали команду ключевых направлений</span></div>
+      <div class="journey-step"><b>2026</b><span>Ведём лечение в одном месте</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT / TEAM -->
+<section class="section team" id="about-us">
+  <div class="wrap">
+    <div class="team-story reveal">
+      <div><span class="eyebrow">О клинике</span><h2>ЗдорЗуб — место, где лечение становится понятным</h2></div>
+      <div><p>История клиники началась во Владивостоке в 2020 году с простой идеи: собрать врачей разных направлений в одном пространстве и объяснять пациенту каждый этап без сложных формулировок. Сегодня команда ведёт лечение от диагностики и профилактики до хирургии и восстановления улыбки.</p><p>Собственная зуботехническая лаборатория помогает врачам и техникам работать рядом, быстрее согласовывать форму и оттенок конструкций и контролировать результат на каждом этапе.</p><span class="lab-chip">Собственная зуботехническая лаборатория</span></div>
+    </div>
+    <div class="team-grid">
+      <article class="team-card reveal"><img src="public/team-01.jpg" alt="Андрей Волков"><div><strong class="team-name">Андрей Волков</strong><b>Главный врач</b><span>Комплексные планы лечения</span></div></article>
+      <article class="team-card reveal d1"><img src="public/team-02.jpg" alt="Анна Лебедева"><div><strong class="team-name">Анна Лебедева</strong><b>Стоматолог-терапевт</b><span>Лечение и профилактика</span></div></article>
+      <article class="team-card reveal d2"><img src="public/team-03.jpg" alt="Сергей Орлов"><div><strong class="team-name">Сергей Орлов</strong><b>Стоматолог-ортопед</b><span>Коронки и протезирование</span></div></article>
+      <article class="team-card reveal d3"><img src="public/team-04.jpg" alt="Елена Соколова"><div><strong class="team-name">Елена Соколова</strong><b>Стоматолог-пародонтолог</b><span>Здоровье дёсен</span></div></article>
+      <article class="team-card reveal"><img src="public/team-05.jpg" alt="Михаил Кузнецов"><div><strong class="team-name">Михаил Кузнецов</strong><b>Стоматолог-хирург</b><span>Удаление и имплантация</span></div></article>
+      <article class="team-card reveal d1"><img src="public/team-06.jpg" alt="Дмитрий Морозов"><div><strong class="team-name">Дмитрий Морозов</strong><b>Стоматолог-терапевт</b><span>Восстановление зубов</span></div></article>
+      <article class="team-card reveal d2"><img src="public/team-07.jpg" alt="Мария Воронова"><div><strong class="team-name">Мария Воронова</strong><b>Координатор лечения</b><span>Сопровождение пациента</span></div></article>
+      <article class="team-card reveal d3"><img src="public/team-08.jpg" alt="Ольга Белова"><div><strong class="team-name">Ольга Белова</strong><b>Стоматолог-гигиенист</b><span>Профессиональная гигиена</span></div></article>
+      <article class="team-card reveal"><img src="public/team-09.jpg" alt="Наталья Фёдорова"><div><strong class="team-name">Наталья Фёдорова</strong><b>Зубной техник</b><span>Собственная лаборатория</span></div></article>
+      <figure class="team-group reveal d1"><img src="public/team-group-dmitry.png" alt="Команда стоматологии ЗдорЗуб"><figcaption>Команда «ЗдорЗуб»</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- CLINIC GALLERY: PART OF ABOUT -->
+<section class="section gallery" id="gallery">
+  <div class="wrap">
+    <div class="gallery-head reveal">
+      <span class="eyebrow">Пространство клиники</span>
+      <h2>Посмотрите, как всё устроено</h2>
+    </div>
+    <div class="works-row">
+      <div class="works-col reveal rl">
+        <div class="wslider" data-slider>
+          <div class="wslider-track">
+            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-exterior.png"><img src="public/zdorzub-exterior.png" alt="Фасад стоматологии «ЗдорЗуб» во Владивостоке"></button></div>
+            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-reception.png"><img src="public/zdorzub-reception.png" alt="Ресепшен стоматологии «ЗдорЗуб»"></button></div>
+            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-corridor.png"><img src="public/zdorzub-corridor.png" alt="Коридор стоматологии «ЗдорЗуб»"></button></div>
+            <div class="wslide"><button class="photo-graded" data-photo="public/cabinet-1.png"><img src="public/cabinet-1.png" alt="Стоматологический кабинет клиники «ЗдорЗуб»"></button></div>
+            <div class="wslide"><button class="photo-graded" data-photo="public/cabinet-2.png"><img src="public/cabinet-2.png" alt="Кабинет лечения и диагностики клиники «ЗдорЗуб»"></button></div>
+          </div>
+          <button class="wslider-arrow prev" type="button" aria-label="Предыдущее фото"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <button class="wslider-arrow next" type="button" aria-label="Следующее фото"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+          <div class="wslider-dots"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -723,18 +835,15 @@ html:not(.js) .pstory-viewport{height:auto!important}
       </div>
       <p>Эстетическое восстановление формы и естественного оттенка зубов.</p>
     </div>
-    <div class="case-line reveal">
-      <figure class="case-photo before">
-        <img src="public/case-before.png" alt="Состояние зубов до эстетического восстановления">
-        <figcaption class="case-label">До</figcaption>
-      </figure>
-      <span class="case-arrow" aria-hidden="true">→</span>
-      <figure class="case-photo after">
-        <img src="public/case-after.png" alt="Результат после эстетического восстановления">
-        <figcaption class="case-label">После</figcaption>
-      </figure>
+    <div class="case-carousel reveal" data-cases>
+      <div class="case-track">
+        <div class="case-slide"><figure class="case-photo before"><img src="public/case-before.png" alt="До эстетического восстановления"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img src="public/case-after.png" alt="После эстетического восстановления"><figcaption class="case-label">После</figcaption></figure></div>
+        <div class="case-slide"><figure class="case-photo before"><img src="public/case-implant-before.png" alt="До восстановления отсутствующего зуба"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img src="public/case-implant-after.png" alt="После установки импланта с коронкой"><figcaption class="case-label">После</figcaption></figure></div>
+        <div class="case-slide"><figure class="case-photo before"><img src="public/case-hygiene-before.png" alt="До профессиональной гигиены"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img src="public/case-hygiene-after.png" alt="После профессиональной гигиены"><figcaption class="case-label">После</figcaption></figure></div>
+        <div class="case-slide"><figure class="case-photo before"><img src="public/case-chip-before.png" alt="До восстановления скола"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img src="public/case-chip-after.png" alt="После восстановления скола"><figcaption class="case-label">После</figcaption></figure></div>
+      </div>
+      <div class="case-controls"><button type="button" data-case-prev aria-label="Предыдущая работа">←</button><button type="button" data-case-next aria-label="Следующая работа">→</button></div>
     </div>
-    <p class="cases-note reveal">Пример визуализации результата. План лечения и результат зависят от индивидуальной клинической ситуации.</p>
   </div>
 </section>
 
@@ -742,19 +851,19 @@ html:not(.js) .pstory-viewport{height:auto!important}
 <section class="metrics" aria-label="Принципы работы">
   <div class="wrap">
     <div class="metric reveal">
-      <span class="principle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3c1.3 0 2 .8 3 .8S13.7 3 15 3c2.7 0 4 2.2 4 4.5 0 1.8-.8 3.3-1.4 4.9-.8 2.2-1.2 5.6-2.8 5.6-1.5 0-1.2-4.1-2.8-4.1S10.7 18 9.2 18c-1.6 0-2-3.4-2.8-5.6C5.8 10.8 5 9.3 5 7.5 5 5.2 6.3 3 9 3Z"/><circle cx="18" cy="17" r="3"/><path d="m20.2 19.2 1.6 1.6"/></svg></span>
+      <img src="public/principle-1.jpg" alt="Бережная диагностика в стоматологическом кабинете">
       <span>бережная диагностика</span>
     </div>
     <div class="metric reveal d1">
-      <span class="principle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M8 9h8M8 13h4m-4 4 2 2 5-5"/></svg></span>
+      <img src="public/principle-2.jpg" alt="Составление понятного плана лечения">
       <span>понятный план лечения</span>
     </div>
     <div class="metric reveal d2">
-      <span class="principle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 20h10M12 16v4M7 10h2l1.5-3 3 6 1.5-3H18"/></svg></span>
+      <img src="public/principle-3.jpg" alt="Современное стоматологическое оборудование">
       <span>современное оборудование</span>
     </div>
     <div class="metric reveal d3">
-      <span class="principle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><path d="M4 13a2 2 0 0 0 2 2h1v-5H6a2 2 0 0 0-2 2Zm16 0a2 2 0 0 1-2 2h-1v-5h1a2 2 0 0 1 2 2Z"/><path d="M18 15v1a3 3 0 0 1-3 3h-2"/><circle cx="11.5" cy="19" r="1"/></svg></span>
+      <img src="public/reception-support.png" alt="Сотрудник клиники «ЗдорЗуб» отвечает пациенту по телефону на ресепшене">
       <span>поддержка после приёма</span>
     </div>
   </div>
@@ -776,17 +885,6 @@ html:not(.js) .pstory-viewport{height:auto!important}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 3.5a5 5 0 0 1 5 5M14.5 7a2 2 0 0 1 2 2M8 5l2 4-2 1.5a11 11 0 0 0 5.5 5.5L15 19l4 2a2 2 0 0 1-1 2.5A16.5 16.5 0 0 1 2 8 2 2 0 0 1 4.5 6z"/></svg>
       Записаться · +7 987 654 321
     </a>
-  </div>
-</section>
-
-<!-- QUOTE BAND -->
-<section class="section band">
-  <svg class="band-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0,90 C360,10 1080,10 1440,90 L1440,0 L0,0 Z" fill="#fff"/></svg>
-  <div class="wrap reveal">
-    <p class="intro">Объясняем план лечения простыми словами и держим комфортный темп на приёме.</p>
-    <blockquote>«Пришёл — выявили проблему — решили проблему»</blockquote>
-    <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg></div>
-    <cite>Из отзывов наших пациентов</cite>
   </div>
 </section>
 
@@ -884,6 +982,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
     <div class="reviews-head reveal">
       <h2>Что говорят пациенты</h2>
     </div>
+    <div class="review-carousel" data-review-carousel>
     <div class="review-grid">
       <article class="review reveal rl">
         <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg></div>
@@ -905,6 +1004,20 @@ html:not(.js) .pstory-viewport{height:auto!important}
         <p>Работают действительно профессионалы, знающие своё дело. Быстро и качественно. Ходят все члены нашей семьи.</p>
         <footer><b>Сергей Н.</b></footer>
       </article>
+      <article class="review"><span class="stars-text">★★★★★</span><p>Пришла на консультацию по поводу коронки. Не уговаривали делать срочно, дали время подумать и записали все варианты на бумаге.</p><footer><b>Татьяна К.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★★</span><p>У сына откололся передний зуб. Сделали аккуратно, оттенок совпал — я сама не сразу нашла, где была проблема.</p><footer><b>Ирина М.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★★</span><p>Записывался утром с острой болью. Приняли между пациентами, снимок и лечение сделали на месте. Спасибо, что не отправили ждать до понедельника.</p><footer><b>Антон Р.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★☆</span><p>Врач понравился, всё спокойно. Приём начался минут на пятнадцать позже, зато меня потом тоже не торопили.</p><footer><b>Вера Л.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★★</span><p>Чистка прошла легче, чем в прошлой клинике. Дёсны почти не болели, щётку и пасту подобрали без попытки что-то продать.</p><footer><b>Павел Д.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★★</span><p>Ставила две коронки. Несколько раз примеряли форму, пока мне самой не понравилось. Цвет выглядит естественно.</p><footer><b>Людмила А.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★★</span><p>Боялся удаления восьмёрки сильнее, чем стоило. Самое неприятное — укол, дальше всё быстро. Вечером администратор написал и спросил о самочувствии.</p><footer><b>Максим Ч.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★★</span><p>Хожу сюда после переезда во Владивосток. Нравится, что каждый раз открывают снимки и показывают, изменилось ли что-нибудь.</p><footer><b>Оксана Ю.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★☆</span><p>Лечение хорошее, персонал приятный. Хотелось бы больше свободных окон вечером, записываться лучше заранее.</p><footer><b>Роман Б.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★★</span><p>Меняла старую пломбу. Доктор сначала показала трещину на увеличении, поэтому было понятно, зачем менять. По прикусу всё удобно.</p><footer><b>Надежда С.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★★</span><p>Приводил маму на протезирование. Объясняли ей напрямую и крупно распечатали рекомендации. Очень человеческое отношение.</p><footer><b>Алексей Г.</b></footer></article>
+      <article class="review"><span class="stars-text">★★★★★</span><p>Каппа от бруксизма подошла со второй примерки. Через неделю перестала просыпаться с напряжённой челюстью.</p><footer><b>Дарья Ф.</b></footer></article>
+    </div>
+    <div class="review-controls"><button type="button" data-review-prev aria-label="Предыдущие отзывы">←</button><button type="button" data-review-next aria-label="Следующие отзывы">→</button></div>
     </div>
   </div>
 </section>
@@ -937,32 +1050,6 @@ html:not(.js) .pstory-viewport{height:auto!important}
         <summary>Как добраться до клиники?</summary>
         <p>Клиника находится в центре Владивостока, на улице Прапорщика Комарова. Перед поездкой уточните маршрут и возможность парковки у администратора.</p>
       </details>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="section gallery" id="gallery">
-  <div class="wrap">
-    <div class="gallery-head reveal">
-      <h2>Фотогалерея</h2>
-    </div>
-    <div class="works-row">
-      <div class="works-col reveal rl">
-        <div class="wslider" data-slider>
-          <div class="wslider-track">
-            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-exterior.png"><img src="public/zdorzub-exterior.png" alt="Фасад стоматологии «ЗдорЗуб» во Владивостоке"></button></div>
-            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-reception.png"><img src="public/zdorzub-reception.png" alt="Ресепшен стоматологии «ЗдорЗуб»"></button></div>
-            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-corridor.png"><img src="public/zdorzub-corridor.png" alt="Коридор стоматологии «ЗдорЗуб»"></button></div>
-            <div class="wslide"><button class="photo-graded" data-photo="public/cabinet-1.png"><img src="public/cabinet-1.png" alt="Стоматологический кабинет клиники «ЗдорЗуб»"></button></div>
-            <div class="wslide"><button class="photo-graded" data-photo="public/cabinet-2.png"><img src="public/cabinet-2.png" alt="Кабинет лечения и диагностики клиники «ЗдорЗуб»"></button></div>
-          </div>
-          <button class="wslider-arrow prev" type="button" aria-label="Предыдущее фото"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
-          <button class="wslider-arrow next" type="button" aria-label="Следующее фото"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-          <div class="wslider-dots"></div>
-        </div>
-        <p class="works-cap">Фасад, ресепшен и лечебные кабинеты «ЗдорЗуб»</p>
-      </div>
     </div>
   </div>
 </section>
@@ -1004,12 +1091,23 @@ html:not(.js) .pstory-viewport{height:auto!important}
       </div>
     </div>
     <div class="map reveal">
-      <img src="public/zdorzub-exterior.png" alt="Фасад стоматологии «ЗдорЗуб» во Владивостоке" style="width:100%;height:100%;object-fit:cover">
+      <iframe src="https://yandex.ru/map-widget/v1/?text=%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%B2%D0%BE%D1%81%D1%82%D0%BE%D0%BA%2C%20%D1%83%D0%BB.%20%D0%9F%D1%80%D0%B0%D0%BF%D0%BE%D1%80%D1%89%D0%B8%D0%BA%D0%B0%20%D0%9A%D0%BE%D0%BC%D0%B0%D1%80%D0%BE%D0%B2%D0%B0%2C%2023&z=16" title="Клиника «ЗдорЗуб» на Яндекс Картах" loading="lazy" allowfullscreen></iframe>
       <div class="map-card">
         <b>ЗдорЗуб</b>
         <small>Владивосток, ул. Прапорщика Комарова, 23</small>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- QUOTE BAND -->
+<section class="section band">
+  <svg class="band-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0,90 C360,10 1080,10 1440,90 L1440,0 L0,0 Z" fill="#fff"/></svg>
+  <div class="wrap reveal">
+    <p class="intro">Объясняем план лечения простыми словами и держим комфортный темп на приёме.</p>
+    <blockquote>«Пришёл — выявили проблему — решили проблему»</blockquote>
+    <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.5 7 .9-5 4.8 1.3 7-6.6-3.5L6.4 21l1.3-7-5-4.8 7-.9z"/></svg></div>
+    <cite>Из отзывов наших пациентов</cite>
   </div>
 </section>
 
@@ -1032,7 +1130,9 @@ html:not(.js) .pstory-viewport{height:auto!important}
 
 <div class="lightbox" id="lightbox" hidden>
   <button id="lb-close" aria-label="Закрыть">×</button>
+  <button class="lb-arrow lb-prev" id="lb-prev" aria-label="Предыдущая фотография">‹</button>
   <img id="lb-img" alt="Просмотр фотографии">
+  <button class="lb-arrow lb-next" id="lb-next" aria-label="Следующая фотография">›</button>
 </div>
 
 <script>
@@ -1054,8 +1154,13 @@ html:not(.js) .pstory-viewport{height:auto!important}
     if(!reduce){
       /* Counters finish first; then the still image turns into a slow cinematic shot. */
       setTimeout(function(){hero.classList.add('cinematic');},2100);
-      setTimeout(function(){hero.classList.add('smile-on');},6800);
-      setTimeout(function(){hero.classList.add('scene-two');},12600);
+      var flashSmile=function(){hero.classList.add('smile-on');setTimeout(function(){hero.classList.remove('smile-on');},2600);};
+      setTimeout(function(){flashSmile();setInterval(flashSmile,21000);},6800);
+      var backgrounds=hero.querySelectorAll('.hero-bg'),scene=0;
+      setTimeout(function(){
+        function nextScene(){scene=(scene+1)%backgrounds.length;backgrounds.forEach(function(bg,i){bg.classList.toggle('active',i===scene);});hero.classList.toggle('scene-two',scene===1);}
+        nextScene();setInterval(nextScene,10500);
+      },12600);
     }
   }
   if(reduce){
@@ -1110,7 +1215,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
         dec=+(el.dataset.dec||0),
         suf=el.dataset.suf||'',
         t0=null,dur=1500;
-    function fmt(v){return (dec?v.toFixed(dec).replace('.',','):Math.round(v).toLocaleString('ru-RU'))+suf;}
+    function fmt(v){return (dec?v.toFixed(dec).replace('.',','):(el.dataset.plain?String(Math.round(v)):Math.round(v).toLocaleString('ru-RU')))+suf;}
     function tick(ts){
       if(!t0)t0=ts;
       var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);
@@ -1133,17 +1238,38 @@ html:not(.js) .pstory-viewport{height:auto!important}
   },{threshold:.4});
   document.querySelectorAll('.counters,.review-summary').forEach(function(s){cio.observe(s);});
 
+  /* ---- questions before the compact reviews block ---- */
+  var faqSection=document.getElementById('faq'),reviewsSection=document.getElementById('reviews');
+  if(faqSection&&reviewsSection)reviewsSection.parentNode.insertBefore(faqSection,reviewsSection);
+
+  /* ---- two-row reviews carousel: eight columns ---- */
+  document.querySelectorAll('[data-review-carousel]').forEach(function(root){
+    var track=root.querySelector('.review-grid');
+    function step(dir){var card=track.querySelector('.review'),gap=18;track.scrollBy({left:dir*(card.getBoundingClientRect().width+gap),behavior:reduce?'auto':'smooth'});}
+    root.querySelector('[data-review-prev]').onclick=function(){step(-1);};
+    root.querySelector('[data-review-next]').onclick=function(){step(1);};
+  });
+
+  /* ---- before / after carousel ---- */
+  document.querySelectorAll('[data-cases]').forEach(function(root){
+    var track=root.querySelector('.case-track'),slides=track.querySelectorAll('.case-slide'),i=0;
+    function go(n){i=(n+slides.length)%slides.length;track.scrollTo({left:slides[i].offsetLeft-track.offsetLeft,behavior:reduce?'auto':'smooth'});}
+    root.querySelector('[data-case-prev]').onclick=function(){go(i-1);};
+    root.querySelector('[data-case-next]').onclick=function(){go(i+1);};
+  });
+
   /* ---- scrollspy: active nav link ---- */
   var navlinks={};
   document.querySelectorAll('.nav a[href^="#"]').forEach(function(a){navlinks[a.getAttribute('href').slice(1)]=a;});
   var spy=new IntersectionObserver(function(entries){
     entries.forEach(function(en){
       if(en.isIntersecting){
-        Object.keys(navlinks).forEach(function(k){navlinks[k].classList.toggle('active',k===en.target.id);});
+        var activeId=en.target.id==='gallery'?'about-us':en.target.id;
+        Object.keys(navlinks).forEach(function(k){navlinks[k].classList.toggle('active',k===activeId);});
       }
     });
   },{rootMargin:'-45% 0px -50% 0px'});
-  ['services','reviews','faq','gallery','contacts'].forEach(function(id){
+  ['services','about-us','reviews','faq','gallery','contacts'].forEach(function(id){
     var s=document.getElementById(id); if(s)spy.observe(s);
   });
 
@@ -1244,14 +1370,17 @@ html:not(.js) .pstory-viewport{height:auto!important}
   });
 
   /* ---- lightbox ---- */
-  var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-img');
+  var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-img'),lbItems=[],lbIndex=0;
+  function lbShow(n){if(!lbItems.length)return;lbIndex=(n+lbItems.length)%lbItems.length;lbImg.src=lbItems[lbIndex].dataset.photo;lbImg.alt=lbItems[lbIndex].querySelector('img')?.alt||'Просмотр фотографии';}
   document.querySelectorAll('[data-photo]').forEach(function(b){
-    b.onclick=function(){lbImg.src=b.dataset.photo;lb.hidden=false;};
+    b.onclick=function(){var scope=b.closest('.wslider')||b.closest('.pstory-viewport')||document;lbItems=Array.prototype.slice.call(scope.querySelectorAll('[data-photo]'));lbIndex=lbItems.indexOf(b);lbShow(lbIndex);lb.hidden=false;};
   });
   var close=function(){lb.hidden=true;lbImg.removeAttribute('src');};
   document.getElementById('lb-close').onclick=close;
+  document.getElementById('lb-prev').onclick=function(e){e.stopPropagation();lbShow(lbIndex-1);};
+  document.getElementById('lb-next').onclick=function(e){e.stopPropagation();lbShow(lbIndex+1);};
   lb.onclick=function(e){if(e.target===lb)close();};
-  addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)close();});
+  addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')close();else if(e.key==='ArrowRight')lbShow(lbIndex+1);else if(e.key==='ArrowLeft')lbShow(lbIndex-1);});
 })();
 </script>
 </body>
