@@ -11,6 +11,7 @@
 <link rel="icon" href="public/zdorzub-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="public/zdorzub-exterior.png" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -166,7 +167,7 @@ html:not(.js) .preloader{display:none}
 }
 .hero-bg{position:absolute;inset:-3%;z-index:0;background-position:center;background-size:cover;transform:scale(1.12);opacity:0;transition:opacity 2s ease;will-change:transform,opacity}
 .hero-bg-one{background-image:url("public/zdorzub-exterior.png")}
-.hero-bg-two{background-image:url("public/zdorzub-exterior-evening.png");background-position:center}
+.hero-bg-two{background-position:center}
 .hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(4,7,12,.92) 0%,rgba(4,7,12,.72) 32%,rgba(4,7,12,.12) 66%,rgba(4,7,12,.28) 100%);pointer-events:none}
 .hero-bg.active{opacity:1}
 .hero.cinematic .hero-bg{animation:heroZoom 13s linear infinite alternate}
@@ -698,7 +699,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-bg hero-bg-one active" aria-hidden="true"></div>
-  <div class="hero-bg hero-bg-two" aria-hidden="true"></div>
+  <div class="hero-bg hero-bg-two" data-bg="public/zdorzub-exterior-evening.png" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-inner">
       <span class="eyebrow">Владивосток · Прапорщика Комарова, 23</span>
@@ -791,19 +792,19 @@ html:not(.js) .pstory-viewport{height:auto!important}
     </div>
     <div class="team-carousel">
       <div class="team-track" data-hscroll>
-        <article class="team-card"><img src="public/team-01.jpg" alt="Андрей Волков"><div><strong class="team-name">Андрей Волков</strong><b>Главный врач</b><span>Комплексные планы лечения</span></div></article>
-        <article class="team-card"><img src="public/team-02.jpg" alt="Анна Лебедева"><div><strong class="team-name">Анна Лебедева</strong><b>Стоматолог-терапевт</b><span>Лечение и профилактика</span></div></article>
-        <article class="team-card"><img src="public/team-03.jpg" alt="Сергей Орлов"><div><strong class="team-name">Сергей Орлов</strong><b>Стоматолог-ортопед</b><span>Коронки и протезирование</span></div></article>
-        <article class="team-card"><img src="public/team-04.jpg" alt="Елена Соколова"><div><strong class="team-name">Елена Соколова</strong><b>Стоматолог-пародонтолог</b><span>Здоровье дёсен</span></div></article>
-        <article class="team-card"><img src="public/team-05.jpg" alt="Михаил Кузнецов"><div><strong class="team-name">Михаил Кузнецов</strong><b>Стоматолог-хирург</b><span>Удаление и имплантация</span></div></article>
-        <article class="team-card"><img src="public/team-06.jpg" alt="Дмитрий Морозов"><div><strong class="team-name">Дмитрий Морозов</strong><b>Стоматолог-терапевт</b><span>Восстановление зубов</span></div></article>
-        <article class="team-card"><img src="public/team-07.jpg" alt="Мария Воронова"><div><strong class="team-name">Мария Воронова</strong><b>Координатор лечения</b><span>Сопровождение пациента</span></div></article>
-        <article class="team-card"><img src="public/team-08.jpg" alt="Ольга Белова"><div><strong class="team-name">Ольга Белова</strong><b>Стоматолог-гигиенист</b><span>Профессиональная гигиена</span></div></article>
-        <article class="team-card"><img src="public/team-09.jpg" alt="Наталья Фёдорова"><div><strong class="team-name">Наталья Фёдорова</strong><b>Зубной техник</b><span>Собственная лаборатория</span></div></article>
+        <article class="team-card"><img loading="lazy" src="public/team-01.jpg" alt="Андрей Волков"><div><strong class="team-name">Андрей Волков</strong><b>Главный врач</b><span>Комплексные планы лечения</span></div></article>
+        <article class="team-card"><img loading="lazy" src="public/team-02.jpg" alt="Анна Лебедева"><div><strong class="team-name">Анна Лебедева</strong><b>Стоматолог-терапевт</b><span>Лечение и профилактика</span></div></article>
+        <article class="team-card"><img loading="lazy" src="public/team-03.jpg" alt="Сергей Орлов"><div><strong class="team-name">Сергей Орлов</strong><b>Стоматолог-ортопед</b><span>Коронки и протезирование</span></div></article>
+        <article class="team-card"><img loading="lazy" src="public/team-04.jpg" alt="Елена Соколова"><div><strong class="team-name">Елена Соколова</strong><b>Стоматолог-пародонтолог</b><span>Здоровье дёсен</span></div></article>
+        <article class="team-card"><img loading="lazy" src="public/team-05.jpg" alt="Михаил Кузнецов"><div><strong class="team-name">Михаил Кузнецов</strong><b>Стоматолог-хирург</b><span>Удаление и имплантация</span></div></article>
+        <article class="team-card"><img loading="lazy" src="public/team-06.jpg" alt="Дмитрий Морозов"><div><strong class="team-name">Дмитрий Морозов</strong><b>Стоматолог-терапевт</b><span>Восстановление зубов</span></div></article>
+        <article class="team-card"><img loading="lazy" src="public/team-07.jpg" alt="Мария Воронова"><div><strong class="team-name">Мария Воронова</strong><b>Координатор лечения</b><span>Сопровождение пациента</span></div></article>
+        <article class="team-card"><img loading="lazy" src="public/team-08.jpg" alt="Ольга Белова"><div><strong class="team-name">Ольга Белова</strong><b>Стоматолог-гигиенист</b><span>Профессиональная гигиена</span></div></article>
+        <article class="team-card"><img loading="lazy" src="public/team-09.jpg" alt="Наталья Фёдорова"><div><strong class="team-name">Наталья Фёдорова</strong><b>Зубной техник</b><span>Собственная лаборатория</span></div></article>
       </div>
       <div class="review-controls team-controls"><button type="button" data-team-prev aria-label="Предыдущие врачи">←</button><button type="button" data-team-next aria-label="Следующие врачи">→</button></div>
     </div>
-    <figure class="team-group reveal"><img src="public/team-group-dmitry.png" alt="Команда стоматологии ЗдорЗуб"><figcaption>Команда «ЗдорЗуб»</figcaption></figure>
+    <figure class="team-group reveal"><img loading="lazy" src="public/team-group-dmitry.png" alt="Команда стоматологии ЗдорЗуб"><figcaption>Команда «ЗдорЗуб»</figcaption></figure>
   </div>
 </section>
 
@@ -818,11 +819,11 @@ html:not(.js) .pstory-viewport{height:auto!important}
       <div class="works-col reveal rl">
         <div class="wslider" data-slider>
           <div class="wslider-track">
-            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-exterior.png"><img src="public/zdorzub-exterior.png" alt="Фасад стоматологии «ЗдорЗуб» во Владивостоке"></button></div>
-            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-reception.png"><img src="public/zdorzub-reception.png" alt="Ресепшен стоматологии «ЗдорЗуб»"></button></div>
-            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-corridor.png"><img src="public/zdorzub-corridor.png" alt="Коридор стоматологии «ЗдорЗуб»"></button></div>
-            <div class="wslide"><button class="photo-graded" data-photo="public/cabinet-1.png"><img src="public/cabinet-1.png" alt="Стоматологический кабинет клиники «ЗдорЗуб»"></button></div>
-            <div class="wslide"><button class="photo-graded" data-photo="public/cabinet-2.png"><img src="public/cabinet-2.png" alt="Кабинет лечения и диагностики клиники «ЗдорЗуб»"></button></div>
+            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-exterior.png"><img loading="lazy" src="public/zdorzub-exterior.png" alt="Фасад стоматологии «ЗдорЗуб» во Владивостоке"></button></div>
+            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-reception.png"><img loading="lazy" src="public/zdorzub-reception.png" alt="Ресепшен стоматологии «ЗдорЗуб»"></button></div>
+            <div class="wslide"><button class="photo-graded" data-photo="public/zdorzub-corridor.png"><img loading="lazy" src="public/zdorzub-corridor.png" alt="Коридор стоматологии «ЗдорЗуб»"></button></div>
+            <div class="wslide"><button class="photo-graded" data-photo="public/cabinet-1.png"><img loading="lazy" src="public/cabinet-1.png" alt="Стоматологический кабинет клиники «ЗдорЗуб»"></button></div>
+            <div class="wslide"><button class="photo-graded" data-photo="public/cabinet-2.png"><img loading="lazy" src="public/cabinet-2.png" alt="Кабинет лечения и диагностики клиники «ЗдорЗуб»"></button></div>
           </div>
           <button class="wslider-arrow prev" type="button" aria-label="Предыдущее фото"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
           <button class="wslider-arrow next" type="button" aria-label="Следующее фото"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
@@ -845,10 +846,10 @@ html:not(.js) .pstory-viewport{height:auto!important}
     </div>
     <div class="case-carousel reveal" data-cases>
       <div class="case-track">
-        <div class="case-slide"><figure class="case-photo before"><img src="public/case-before.png" alt="До эстетического восстановления"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img src="public/case-after.png" alt="После эстетического восстановления"><figcaption class="case-label">После</figcaption></figure></div>
-        <div class="case-slide"><figure class="case-photo before"><img src="public/case-implant-before.png" alt="До восстановления отсутствующего зуба"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img src="public/case-implant-after.png" alt="После установки импланта с коронкой"><figcaption class="case-label">После</figcaption></figure></div>
-        <div class="case-slide"><figure class="case-photo before"><img src="public/case-hygiene-before.png" alt="До профессиональной гигиены"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img src="public/case-hygiene-after.png" alt="После профессиональной гигиены"><figcaption class="case-label">После</figcaption></figure></div>
-        <div class="case-slide"><figure class="case-photo before"><img src="public/case-chip-before.png" alt="До восстановления скола"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img src="public/case-chip-after.png" alt="После восстановления скола"><figcaption class="case-label">После</figcaption></figure></div>
+        <div class="case-slide"><figure class="case-photo before"><img loading="lazy" src="public/case-before.png" alt="До эстетического восстановления"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img loading="lazy" src="public/case-after.png" alt="После эстетического восстановления"><figcaption class="case-label">После</figcaption></figure></div>
+        <div class="case-slide"><figure class="case-photo before"><img loading="lazy" src="public/case-implant-before.png" alt="До восстановления отсутствующего зуба"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img loading="lazy" src="public/case-implant-after.png" alt="После установки импланта с коронкой"><figcaption class="case-label">После</figcaption></figure></div>
+        <div class="case-slide"><figure class="case-photo before"><img loading="lazy" src="public/case-hygiene-before.png" alt="До профессиональной гигиены"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img loading="lazy" src="public/case-hygiene-after.png" alt="После профессиональной гигиены"><figcaption class="case-label">После</figcaption></figure></div>
+        <div class="case-slide"><figure class="case-photo before"><img loading="lazy" src="public/case-chip-before.png" alt="До восстановления скола"><figcaption class="case-label">До</figcaption></figure><span class="case-arrow" aria-hidden="true">→</span><figure class="case-photo after"><img loading="lazy" src="public/case-chip-after.png" alt="После восстановления скола"><figcaption class="case-label">После</figcaption></figure></div>
       </div>
       <div class="case-controls"><button type="button" data-case-prev aria-label="Предыдущая работа">←</button><button type="button" data-case-next aria-label="Следующая работа">→</button></div>
     </div>
@@ -859,19 +860,19 @@ html:not(.js) .pstory-viewport{height:auto!important}
 <section class="metrics" aria-label="Принципы работы">
   <div class="wrap">
     <div class="metric reveal">
-      <img src="public/principle-1.jpg" alt="Бережная диагностика в стоматологическом кабинете">
+      <img loading="lazy" src="public/principle-1.jpg" alt="Бережная диагностика в стоматологическом кабинете">
       <span>бережная диагностика</span>
     </div>
     <div class="metric reveal d1">
-      <img src="public/principle-2.jpg" alt="Составление понятного плана лечения">
+      <img loading="lazy" src="public/principle-2.jpg" alt="Составление понятного плана лечения">
       <span>понятный план лечения</span>
     </div>
     <div class="metric reveal d2">
-      <img src="public/principle-3.jpg" alt="Современное стоматологическое оборудование">
+      <img loading="lazy" src="public/principle-3.jpg" alt="Современное стоматологическое оборудование">
       <span>современное оборудование</span>
     </div>
     <div class="metric reveal d3">
-      <img src="public/reception-support.png" alt="Сотрудник клиники «ЗдорЗуб» отвечает пациенту по телефону на ресепшене">
+      <img loading="lazy" src="public/reception-support.png" alt="Сотрудник клиники «ЗдорЗуб» отвечает пациенту по телефону на ресепшене">
       <span>поддержка после приёма</span>
     </div>
   </div>
@@ -907,7 +908,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
       <div class="pstory-viewport">
         <article class="pstory active">
           <div class="pstory-photo photo-graded">
-            <button data-photo="public/zdorzub-patient-anna.png"><img src="public/zdorzub-patient-anna.png" alt="Пациентка клиники «ЗдорЗуб» с брендированной зубной щёткой"></button>
+            <button data-photo="public/zdorzub-patient-anna.png"><img loading="lazy" src="public/zdorzub-patient-anna.png" alt="Пациентка клиники «ЗдорЗуб» с брендированной зубной щёткой"></button>
           </div>
           <div class="pstory-body">
             <span class="kind">С первого визита</span>
@@ -923,7 +924,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
         </article>
         <article class="pstory">
           <div class="pstory-photo photo-graded">
-            <button data-photo="public/zdorzub-patient-mikhail.png"><img src="public/zdorzub-patient-mikhail.png" alt="Пациент клиники «ЗдорЗуб» с брендированной зубной щёткой"></button>
+            <button data-photo="public/zdorzub-patient-mikhail.png"><img loading="lazy" src="public/zdorzub-patient-mikhail.png" alt="Пациент клиники «ЗдорЗуб» с брендированной зубной щёткой"></button>
           </div>
           <div class="pstory-body">
             <span class="kind">Понятный план</span>
@@ -939,7 +940,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
         </article>
         <article class="pstory">
           <div class="pstory-photo photo-graded">
-            <button data-photo="public/patient-sergey-brush.png"><img src="public/patient-sergey-brush.png" alt="Сергей с брендированной зубной щёткой «ЗдорЗуб»"></button>
+            <button data-photo="public/patient-sergey-brush.png"><img loading="lazy" src="public/patient-sergey-brush.png" alt="Сергей с брендированной зубной щёткой «ЗдорЗуб»"></button>
           </div>
           <div class="pstory-body">
             <span class="kind">Без лишних разговоров</span>
@@ -951,7 +952,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
         </article>
         <article class="pstory">
           <div class="pstory-photo photo-graded">
-            <button data-photo="public/patient-galina-brush.png"><img src="public/patient-galina-brush.png" alt="Галина Петровна с брендированной зубной щёткой «ЗдорЗуб»"></button>
+            <button data-photo="public/patient-galina-brush.png"><img loading="lazy" src="public/patient-galina-brush.png" alt="Галина Петровна с брендированной зубной щёткой «ЗдорЗуб»"></button>
           </div>
           <div class="pstory-body">
             <span class="kind">Спокойный приём</span>
@@ -963,7 +964,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
         </article>
         <article class="pstory">
           <div class="pstory-photo photo-graded">
-            <button data-photo="public/patient-olga-brush.png"><img src="public/patient-olga-brush.png" alt="Ольга с брендированной зубной щёткой «ЗдорЗуб»"></button>
+            <button data-photo="public/patient-olga-brush.png"><img loading="lazy" src="public/patient-olga-brush.png" alt="Ольга с брендированной зубной щёткой «ЗдорЗуб»"></button>
           </div>
           <div class="pstory-body">
             <span class="kind">После работы</span>
@@ -1160,8 +1161,9 @@ html:not(.js) .pstory-viewport{height:auto!important}
     pre.classList.add('done');
     hero.classList.add('ready');
     if(!reduce){
-      /* Counters finish first; then the still image turns into a slow cinematic shot. */
       hero.classList.add('cinematic');
+      var bgTwo=hero.querySelector('.hero-bg-two');
+      if(bgTwo&&bgTwo.dataset.bg)setTimeout(function(){bgTwo.style.backgroundImage='url("'+bgTwo.dataset.bg+'")';},2500);
       var flashSmile=function(){hero.classList.add('smile-on');setTimeout(function(){hero.classList.remove('smile-on');},2600);};
       setTimeout(function(){flashSmile();setInterval(flashSmile,21000);},6800);
       var backgrounds=hero.querySelectorAll('.hero-bg'),scene=0;
@@ -1170,6 +1172,13 @@ html:not(.js) .pstory-viewport{height:auto!important}
         nextScene();setInterval(nextScene,10500);
       },12600);
     }
+  }
+  function whenHeroPhotoReady(cb){
+    var img=new Image(),done=false;
+    function fin(){if(done)return;done=true;cb();}
+    img.onload=fin;img.onerror=fin;img.src='public/zdorzub-exterior.png';
+    if(img.complete)fin();          /* уже в кэше благодаря <link rel=preload> */
+    setTimeout(fin,1800);           /* страховка: не держать прелоадер дольше */
   }
   if(reduce){
     if(plPct)plPct.textContent='100%';
@@ -1182,7 +1191,7 @@ html:not(.js) .pstory-viewport{height:auto!important}
       if(plPct)plPct.textContent=Math.round(p*100)+'%';
       if(p<1)requestAnimationFrame(pct);
     })(t0);
-    startHero();
+    whenHeroPhotoReady(startHero);
   }
 
   /* ---- scroll progress bar above the header ---- */
